@@ -302,9 +302,32 @@ Congratulations! You have added the GetALLHNewsIds action.
 
 ### InsertHNewsIdsCloudant
 
+Now you are ready to add the bulk insert to Cloudant DB.
 
+```
+$ cd ../InsertHNewsIdsCloudant/
+$ zip - -r * | docker run -i openwhisk/action-swift-v4.2 -compile main >../action.zip
+  adding: Package.swift (deflated 53%)
+  adding: Source/ (stored 0%)
+  adding: Source/InsertHNewsIdsCloudant.swift (deflated 55%)
+$ ibmcloud fn action update hacker-news-pak/insertHNewsIdsCloudant ../action.zip --kind swift:4.2
+ok: updated action hacker-news-pak/insertHNewsIdsCloudant
+$ ibmcloud fn action invoke hacker-news-pak/insertHNewsIdsCloudant --blocking
+ok: invoked /_/hacker-news-pak/insertHNewsIdsCloudant, but the request has not yet finished, with id 42bf45f15e4a4bc1bf45f15e4a2bc1c6
+```
+Congratulations! That finishes the setup of
 
 ### creating the sequence
+
+As soon as you have created the initial actions you are ready to create the sequence to populate the db with all the needed IDs. Running this action will start the Fanning Out pattern.
+
+```
+$ ibmcloud fn action create hacker-news-pak/analyzeTopHNewsSequence --sequence hacker-news-pak/getAllHNewsIds,hacker-news-pak/insertHNewsIdsCloudant
+ok: created action hacker-news-pak/analyzeTopHNewsSequence
+```
+
+
+
 ### creating the Cloudant Feed action from the template
 ### updating the process-change action
 ### adding NLUaction to the sequence

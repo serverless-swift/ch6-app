@@ -135,7 +135,7 @@ When provisioning Cloudant DB make sure you would use `IAM and legacy credential
 Use the respective region `Dallas` was used in the videos.
 Create the credentials with `manager` rights. See the video.
 
-### creating the package
+## creating the package
 
 Now you create a Openwhisk package:
 
@@ -149,7 +149,7 @@ packages
 
 ```
 
-### creating NLUaction (processing of the url thru Watson NLU)
+## creating NLUaction (processing of the url thru Watson NLU)
 
 ```
 $ zip ../action-src.zip -r *
@@ -217,7 +217,7 @@ ok: invoked /_/hacker-news-pak/NLUaction with id a86f20f71d23402baf20f71d23202b0
 
 Congratulations! That finishes the setup of NLUaction. 
 
-### GetALLHNewsIds action 
+## GetALLHNewsIds action 
 
 Let's get all the Ids from Hacker News. Follow the steps below:
 
@@ -300,7 +300,7 @@ ok: invoked /_/hacker-news-pak/getAllHNewsIds with id c0f1ba655feb490fb1ba655feb
 
 Congratulations! You have added the GetALLHNewsIds action.
 
-### InsertHNewsIdsCloudant
+## InsertHNewsIdsCloudant
 
 Now you are ready to add the bulk insert to Cloudant DB.
 
@@ -315,9 +315,9 @@ ok: updated action hacker-news-pak/insertHNewsIdsCloudant
 $ ibmcloud fn action invoke hacker-news-pak/insertHNewsIdsCloudant --blocking
 ok: invoked /_/hacker-news-pak/insertHNewsIdsCloudant, but the request has not yet finished, with id 42bf45f15e4a4bc1bf45f15e4a2bc1c6
 ```
-Congratulations! That finishes the setup of
+Congratulations! That finishes the setup of InsertHNewsIdsCloudant
 
-### creating the sequence
+## creating the sequence
 
 As soon as you have created the initial actions you are ready to create the sequence to populate the db with all the needed IDs. Running this action will start the Fanning Out pattern.
 
@@ -325,12 +325,103 @@ As soon as you have created the initial actions you are ready to create the sequ
 $ ibmcloud fn action create hacker-news-pak/analyzeTopHNewsSequence --sequence hacker-news-pak/getAllHNewsIds,hacker-news-pak/insertHNewsIdsCloudant
 ok: created action hacker-news-pak/analyzeTopHNewsSequence
 ```
+Congratulations! That finishes the setup of InsertHNewsIdsCloudant
 
+## creating the Cloudant Feed action from the template
 
+Creating the Cloudant Feed action requires you to use quick start templates, and to choose the Cloudant based actions. Set the language to Swift 4.2.
 
-### creating the Cloudant Feed action from the template
+Select the table, the provisioned credentials.
+
 ### updating the process-change action
+
+The default action from the template is not usable for us (it is checking the color of cats, you know :-) )
+So you need to update it.
+
+Use your CLI to do it:
+```
+$ cd ..
+$ cd 02-swift-actions/process-change/
+$ zip - -r * | docker run -i openwhisk/action-swift-v4.2 -compile main >../action.zip
+  adding: Package.swift (deflated 51%)
+  adding: Source/ (stored 0%)
+  adding: Source/process-change.swift (deflated 55%)
+$ ibmcloud fn action update cloudant-events/process-change ../action.zip --kind swift:4.2
+ok: updated action cloudant-events/process-change
+```
+
+Congratulations! You have modified action and you are ready to add two additional services to the Cloudant feed
+
 ### adding NLUaction to the sequence
+
+Use UI to add the NLUaction action to the Cloudant sequence.
+
 ### creating NLUanalysis2DBaction and adding it to the sequence
-### creating GetHNewsNLUanalysis
-### adding the parameters for NLU and Cloudant DB
+
+```
+$ cd ../NLUanalysis2DBaction/
+Mareks-MBP:NLUanalysis2DBaction mareksadowski$ zip - -r * | docker run -i openwhisk/action-swift-v4.2 -compile main >../action.zip
+  adding: Package.swift (deflated 53%)
+  adding: Source/ (stored 0%)
+  adding: Source/NLUanalysis2DBaction.swift (deflated 57%)
+Mareks-MBP:NLUanalysis2DBaction mareksadowski$ ibmcloud fn action update hacker-news-pak/NLUanalysis2DBaction ../action.zip --kind swift:4.2
+ok: updated action hacker-news-pak/NLUanalysis2DBaction
+```
+
+When done use UI to add the NLUanalysis2DBaction action to the Cloudant sequence.
+
+## creating GetHNewsNLUanalysis
+
+```
+$ cd ../GetHNewsNLUanalysis/
+$ zip - -r * | docker run -i openwhisk/action-swift-v4.2 -compile main >../action.zip
+  adding: Package.swift (deflated 53%)
+  adding: Source/ (stored 0%)
+  adding: Source/GetHNewsNLUanalysis.swift (deflated 63%)
+$ ibmcloud fn action update hacker-news-pak/GetHNewsNLUanalysis ../action.zip --kind swift:4.2
+ok: updated action hacker-news-pak/GetHNewsNLUanalysis
+   
+   ```
+
+## adding the parameters for NLU and Cloudant DB
+
+Check if everything is done. Validate actions within the package:
+
+```
+$ ibmcloud fn package get --summary hacker-news-pak
+package /serverless.swift@roboticsinventions.com_dev/hacker-news-pak
+   (parameters: none defined)
+ action /serverless.swift@roboticsinventions.com_dev/hacker-news-pak/GetHNewsNLUanalysis
+   (parameters: none defined)
+ action /serverless.swift@roboticsinventions.com_dev/hacker-news-pak/NLUanalysis2DBaction
+   (parameters: none defined)
+ action /serverless.swift@roboticsinventions.com_dev/hacker-news-pak/analyzeTopHNewsSequence
+   (parameters: none defined)
+ action /serverless.swift@roboticsinventions.com_dev/hacker-news-pak/insertHNewsIdsCloudant
+   (parameters: none defined)
+ action /serverless.swift@roboticsinventions.com_dev/hacker-news-pak/getAllHNewsIds
+   (parameters: none defined)
+ action /serverless.swift@roboticsinventions.com_dev/hacker-news-pak/NLUaction
+   (parameters: none defined)
+```
+
+Last thing to do is to add credentials used in your actions in the respective actions:
+
+- NLU requires setting up the following credentials - it is required only here: hacker-news-pak/NLUaction (use the parameter section of the action UI):
+
+```
+NLU
+"apikey": "my api key"
+"url": "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/<some instance number>"
+```
+
+- actions that use DB (for reading or wrting) need these:
+```
+dbUsername: <some key ending with -bluemix or not>
+dbPassword: <password available for the legacy Cloudant DB deployments - choose IAM and legacy credentials at setup! >
+cloudantURL: https://<user:password@instance setup - the link is available in the created credentials: >.cloudantnosqldb.appdomain.cloud
+```
+I added those to the following actions (the parameter section of the action UI):
+- hacker-news-pak/GetHNewsNLUanalysis
+- hacker-news-pak/NLUanalysis2DBaction
+- hacker-news-pak/insertHNewsIdsCloudant

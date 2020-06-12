@@ -411,9 +411,12 @@ Last thing to do is to add credentials used in your actions in the respective ac
 
 ```
 NLU
-"apikey": "my api key"
-"url": "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/<some instance number>"
+apiKey: "my api key"
+serviceURL: "https://api.us-south.natural-language-understanding.watson.cloud.ibm.com/instances/<some instance number>"
 ```
+See the screenshot:
+
+![](../image/nluCredentials.png)
 
 - actions that use DB (for reading or wrting) need these:
 ```

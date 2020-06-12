@@ -4,7 +4,7 @@ This is the MVP of a mobile app to analyze with Waston NLU the articles presente
 
 Follow the steps:
 
-1. if you haven't done it before - clone tha app
+1. if you haven't done it before - clone the app (`you need to setup the MBaaS in step 02 to be able to run the app`)
 ```
 $ git clone https://github.com/serverless-swift/ch6-app
 Cloning into 'ch6-app'...
@@ -17,7 +17,7 @@ Receiving objects: 100% (100/100), 4.91 MiB | 231.00 KiB/s, done.
 Resolving deltas: 100% (38/38), done.
 ```
 
-Now change the directory to teh app folder:
+Now change the directory to the app folder:
 
 ```
 $ cd ch6-app/

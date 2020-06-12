@@ -20,16 +20,11 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="marek-lennart-202001.png" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bbZ-Kt-X9q">
-                                <rect key="frame" x="-93.5" y="86" width="601" height="614"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="xDj-Pd-3g3" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="6ea-z6-A1b"/>
                             <constraint firstItem="xDj-Pd-3g3" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="DFr-D4-xha"/>
-                            <constraint firstItem="bbZ-Kt-X9q" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Dbd-e5-gFZ"/>
-                            <constraint firstItem="bbZ-Kt-X9q" firstAttribute="top" secondItem="xDj-Pd-3g3" secondAttribute="bottom" constant="8" id="aVh-3e-xXM"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -39,7 +34,4 @@
             <point key="canvasLocation" x="52.173913043478265" y="375"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="marek-lennart-202001.png" width="601" height="614"/>
-    </resources>
 </document>

@@ -5,7 +5,7 @@ The following steps need to be taken in order to get the Serverless MBaaS workin
 
 - provisioning of the services NLU and Cloudant DB
 - creating the package
-- creating NLUaction (processing of the )
+- creating NLUaction (processing of the url thru Watson NLU)
 - GetALLHNewsIds action 
 - InsertHNewsIdsCloudant
 - creating the sequence

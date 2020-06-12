@@ -157,11 +157,153 @@ updating: Package.swift (deflated 48%)
 updating: Source/ (stored 0%)
 updating: Source/nluAnalyze.swift (deflated 69%)
 $ docker run -i openwhisk/action-swift-v4.2 -compile main <../action-src.zip >../action-bin.zip
+$ ibmcloud fn action update hacker-news-pak/NLUaction ../action-bin.zip --kind swift:4.2
+ok: updated action hacker-news-pak/NLUaction
+$ ibmcloud fn action invoke hacker-news-pak/NLUaction --blocking
+ok: invoked /_/hacker-news-pak/NLUaction with id a86f20f71d23402baf20f71d23202b04
+{
+    "activationId": "a86f20f71d23402baf20f71d23202b04",
+    "annotations": [
+        {
+            "key": "path",
+            "value": "serverless.swift@roboticsinventions.com_dev/hacker-news-pak/NLUaction"
+        },
+        {
+            "key": "waitTime",
+            "value": 433
+        },
+        {
+            "key": "kind",
+            "value": "swift:4.2"
+        },
+        {
+            "key": "timeout",
+            "value": false
+        },
+        {
+            "key": "limits",
+            "value": {
+                "concurrency": 1,
+                "logs": 10,
+                "memory": 256,
+                "timeout": 60000
+            }
+        },
+        {
+            "key": "initTime",
+            "value": 66
+        }
+    ],
+    "duration": 75,
+    "end": 1591943192774,
+    "logs": [],
+    "name": "NLUaction",
+    "namespace": "serverless.swift@roboticsinventions.com_dev",
+    "publish": false,
+    "response": {
+        "result": {
+            "error": "The action did not return a dictionary."
+        },
+        "size": 52,
+        "status": "action developer error",
+        "success": false
+    },
+    "start": 1591943192699,
+    "subject": "serverless.swift@roboticsinventions.com",
+    "version": "0.0.1"
+}
 
 ```
 
+Congratulations! That finishes the setup of NLUaction. 
+
 ### GetALLHNewsIds action 
+
+Let's get all the Ids from Hacker News. Follow the steps below:
+
+```
+$ cd ../GetAllHNewsIds/
+$ ls
+Package.swift	Source
+$ zip - -r * | docker run -i openwhisk/action-swift-v4.2 -compile main >../action.zip
+  adding: Package.swift (deflated 51%)
+  adding: Source/ (stored 0%)
+  adding: Source/GetAllHNewsIds.swift (deflated 50%)
+$ ibmcloud fn action update hacker-news-pak/getAllHNewsIds ../action.zip --kind swift:4.2
+ok: updated action hacker-news-pak/getAllHNewsIds
+$ ibmcloud fn action invoke hacker-news-pak/getAllHNewsIds --blocking
+ok: invoked /_/hacker-news-pak/getAllHNewsIds with id c0f1ba655feb490fb1ba655feb990f75
+{
+    "activationId": "c0f1ba655feb490fb1ba655feb990f75",
+    "annotations": [
+        {
+            "key": "path",
+            "value": "serverless.swift@roboticsinventions.com_dev/hacker-news-pak/getAllHNewsIds"
+        },
+        {
+            "key": "waitTime",
+            "value": 395
+        },
+        {
+            "key": "kind",
+            "value": "swift:4.2"
+        },
+        {
+            "key": "timeout",
+            "value": false
+        },
+        {
+            "key": "limits",
+            "value": {
+                "concurrency": 1,
+                "logs": 10,
+                "memory": 256,
+                "timeout": 60000
+            }
+        },
+        {
+            "key": "initTime",
+            "value": 91
+        }
+    ],
+    "duration": 1855,
+    "end": 1591943495489,
+    "logs": [],
+    "name": "getAllHNewsIds",
+    "namespace": "serverless.swift@roboticsinventions.com_dev",
+    "publish": false,
+    "response": {
+        "result": {
+            "newsIds": [
+                23494366,
+                23490367,
+                23495052,
+                23496083,
+                23491940,
+                23495084,
+                23476062,
+                [about 500 rows]
+                23474542,
+                23496090
+            ]
+        },
+        "size": 3191,
+        "status": "success",
+        "success": true
+    },
+    "start": 1591943493634,
+    "subject": "serverless.swift@roboticsinventions.com",
+    "version": "0.0.1"
+}
+
+```
+
+Congratulations! You have added the GetALLHNewsIds action.
+
 ### InsertHNewsIdsCloudant
+
+
+
 ### creating the sequence
 ### creating the Cloudant Feed action from the template
 ### updating the process-change action

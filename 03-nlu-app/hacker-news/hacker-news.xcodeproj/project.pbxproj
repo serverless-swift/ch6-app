@@ -14,7 +14,6 @@
 		D7102E24247CD3AB0041842F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D7102E23247CD3AB0041842F /* Assets.xcassets */; };
 		D7102E27247CD3AB0041842F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D7102E25247CD3AB0041842F /* LaunchScreen.storyboard */; };
 		D7102E2F248079A40041842F /* NewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7102E2E248079A40041842F /* NewsTableViewController.swift */; };
-		D7931ABD248D932C00DFE38E /* marek-lennart-202001.png in Resources */ = {isa = PBXBuildFile; fileRef = D7931ABC248D932B00DFE38E /* marek-lennart-202001.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 		D7102E26247CD3AB0041842F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D7102E28247CD3AB0041842F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D7102E2E248079A40041842F /* NewsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsTableViewController.swift; sourceTree = "<group>"; };
-		D7931ABC248D932B00DFE38E /* marek-lennart-202001.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "marek-lennart-202001.png"; path = "../../../../../../../../Desktop/marek-lennart-202001.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +86,6 @@
 				D7102E2E248079A40041842F /* NewsTableViewController.swift */,
 				D7102E23247CD3AB0041842F /* Assets.xcassets */,
 				D7102E25247CD3AB0041842F /* LaunchScreen.storyboard */,
-				D7931ABC248D932B00DFE38E /* marek-lennart-202001.png */,
 				D7102E28247CD3AB0041842F /* Info.plist */,
 			);
 			path = "hacker-news";
@@ -157,7 +154,6 @@
 				D7102E27247CD3AB0041842F /* LaunchScreen.storyboard in Resources */,
 				D7102E24247CD3AB0041842F /* Assets.xcassets in Resources */,
 				D7102E22247CD3A40041842F /* Main.storyboard in Resources */,
-				D7931ABD248D932C00DFE38E /* marek-lennart-202001.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

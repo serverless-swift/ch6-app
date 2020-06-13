@@ -2,6 +2,8 @@
 
 This is the MVP of a mobile app to analyze with Waston NLU the articles presented at Hacker News (analyzing only articles by their URL).
 
+[Watch the youtube video with detailed steps](https://youtu.be/0J1jjFnKOaY)
+
 Follow the steps:
 
 1. if you haven't done it before - clone the app (`you need to setup the MBaaS in step 02 to be able to run the app`)

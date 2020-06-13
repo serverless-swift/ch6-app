@@ -1,6 +1,8 @@
 # ch6-app - 02-SWIFT-ACTIONS
 This is the section on building the Serverless Backend explained in Serverless Swift by Apress.
 
+[Check this video documenting the first part of compiling and setting up the mobile backend](https://youtu.be/0G3ji8RouKA)
+
 The following steps need to be taken in order to get the Serverless MBaaS working.
 
 - setup for Serverless MBaaS (Mobile Backend as a Service)
